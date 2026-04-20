@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIVFX × Ситидрайв — OLV Концепты · Апрель 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'SB Sans Text',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#06060e;color:#e8e8f0;line-height:1.6;overflow-x:hidden}
+
+:root{
+  --p:#9B3EFF;
+  --pd:#7B2ECC;
+  --pl:#B96AFF;
+  --g:#3DD96A;
+  --gd:#2EB558;
+  --gl:#5AEF88;
+  --bg:#06060e;
+  --surface:rgba(20,18,34,0.9);
+  --border:rgba(155,62,255,0.12);
+  --border2:rgba(255,255,255,0.06);
+}
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 36px}
+
+.glass{
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  background:rgba(20,18,34,0.85);
+  border:1px solid var(--border);
+  border-radius:16px;
+}
+
+.glass-green{
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  background:rgba(15,25,18,0.85);
+  border:1px solid rgba(61,217,106,0.15);
+  border-radius:16px;
+}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:11px;font-weight:700;font-size:13px;letter-spacing:.04em;border:none;cursor:pointer;transition:all .3s;text-decoration:none}
+.bp{background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;box-shadow:0 4px 22px rgba(155,62,255,0.35)}
+.bp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(155,62,255,0.5)}
+.bg-btn{background:linear-gradient(135deg,var(--g),var(--gd));color:#fff;box-shadow:0 4px 22px rgba(61,217,106,0.3)}
+.bg-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(61,217,106,0.45)}
+.bs{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.12)}
+.bs:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+
+/* ── NOISE OVERLAY ── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.4;
+}
+
+/* ── HEADER ── */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 0;
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  background:rgba(6,6,14,.88);
+  border-bottom:1px solid rgba(155,62,255,.1);
+}
+.hrow{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{
+  width:38px;height:38px;border-radius:10px;
+  background:linear-gradient(135deg,var(--p),var(--pd));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;color:#fff;letter-spacing:-.5px;
+  flex-shrink:0;
+}
+.logo-name{font-size:20px;font-weight:900;
+  background:linear-gradient(135deg,#fff,rgba(255,255,255,.6));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;letter-spacing:-.02em;
+}
+.logo-x{color:rgba(255,255,255,.2);font-size:14px;margin:0 4px;font-weight:300}
+.logo-client{font-size:18px;font-weight:700;
+  background:linear-gradient(135deg,var(--g),var(--gl));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.kp-chip{
+  font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);padding:5px 14px;border-radius:20px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);
+}
+
+/* ── HERO ── */
+.hero{padding:112px 0 60px;position:relative;overflow:hidden}
+.hero-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 600px 400px at 80% 20%, rgba(155,62,255,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 400px 300px at 20% 80%, rgba(61,217,106,.05) 0%, transparent 60%);
+}
+.hero-grid{display:grid;grid-template-columns:1fr 360px;gap:56px;align-items:start;position:relative}
+
+.project-label{
+  display:inline-flex;align-items:center;gap:8px;padding:6px 14px;
+  border-radius:40px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  background:rgba(61,217,106,.08);
+  border:1px solid rgba(61,217,106,.2);
+  color:var(--gl);
+  margin-bottom:20px;
+}
+.project-label .dot{width:6px;height:6px;border-radius:50%;background:var(--g);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+
+.hero h1{font-size:clamp(2rem,4vw,3.4rem);font-weight:900;line-height:1.06;margin-bottom:16px;letter-spacing:-.02em}
+.hero h1 .hi{
+  background:linear-gradient(135deg,var(--p) 0%,var(--pl) 40%,var(--g) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.48);line-height:1.75;margin-bottom:28px;max-width:540px}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap}
+
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.info-card{padding:16px 20px;border-radius:14px}
+.info-card .lbl{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  color:rgba(155,62,255,.8);margin-bottom:5px;
+}
+.info-card .val{font-size:13px;color:rgba(255,255,255,.72);line-height:1.5;font-weight:500}
+.info-card .val strong{color:#fff;font-weight:700}
+
+/* ── SECTION DIVIDER ── */
+.section-divider{padding:64px 0 0}
+.sd-inner{
+  display:flex;align-items:baseline;gap:22px;
+  padding-bottom:32px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  margin-bottom:44px;
+}
+.sd-num{
+  font-size:88px;font-weight:900;line-height:1;flex-shrink:0;
+  background:linear-gradient(135deg,rgba(155,62,255,.2),rgba(155,62,255,.06));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.sd-num.green{
+  background:linear-gradient(135deg,rgba(61,217,106,.2),rgba(61,217,106,.06));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.sd-right{flex:1}
+.sd-category{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.35);margin-bottom:8px}
+.sd-title{font-size:clamp(1.7rem,3.2vw,2.6rem);font-weight:900;color:#fff;margin-bottom:14px;line-height:1.08;letter-spacing:-.02em}
+.sd-tags{display:flex;flex-wrap:wrap;gap:8px}
+.sd-tag{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.08)}
+.sd-tag.purple{background:rgba(155,62,255,.12);color:rgba(180,120,255,.9);border-color:rgba(155,62,255,.2)}
+.sd-tag.green{background:rgba(61,217,106,.1);color:rgba(80,220,120,.9);border-color:rgba(61,217,106,.2)}
+
+/* ── STORYBOARD ── */
+.storyboard-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:18px}
+.storyboard{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:44px}
+.frame{border-radius:14px;overflow:hidden;background:#0e0d1a;border:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;transition:border-color .3s,transform .3s}
+.frame:hover{border-color:rgba(155,62,255,.3);transform:translateY(-3px)}
+.frame.green-frame:hover{border-color:rgba(61,217,106,.3)}
+
+.frame-media{
+  aspect-ratio:9/16;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#0e0c1e,#15122a);
+  display:flex;align-items:center;justify-content:center;
+}
+.frame-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* Placeholder с градиентом */
+.frame-ph{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;width:100%;height:100%;
+  position:relative;
+}
+.frame-ph .scene-bg{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:56px;opacity:.12;
+}
+.frame-ph .scene-label{
+  position:relative;z-index:1;
+  font-size:10px;color:rgba(255,255,255,.5);text-align:center;
+  line-height:1.4;padding:0 10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+}
+.frame-ph .scene-num{
+  position:absolute;top:10px;left:12px;
+  font-size:10px;font-weight:900;color:rgba(155,62,255,.5);letter-spacing:.1em;
+}
+.green-frame .frame-ph .scene-num{color:rgba(61,217,106,.5)}
+
+/* Frame gradient overlays */
+.frame-media::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:40%;
+  background:linear-gradient(to top,rgba(14,12,26,0.9),transparent);
+  pointer-events:none;
+}
+
+.frame-info{padding:12px}
+.frame-time{font-size:10px;font-weight:700;color:var(--pl);letter-spacing:.05em;margin-bottom:2px}
+.green-frame .frame-time{color:var(--gl)}
+.frame-type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-bottom:6px}
+.frame-desc{font-size:12px;color:rgba(255,255,255,.7);line-height:1.45;margin-bottom:5px}
+.frame-note{font-size:11px;color:rgba(255,255,255,.28);font-style:italic;line-height:1.4}
+
+/* ── CONCEPT DETAILS ── */
+.concept-details{display:grid;grid-template-columns:1fr 1fr 260px;gap:20px;margin-bottom:36px;align-items:start}
+.detail-block{padding:22px;border-radius:14px}
+.detail-block h4{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--pl);margin-bottom:14px}
+.detail-block.green h4{color:var(--gl)}
+.detail-rows{display:flex;flex-direction:column;gap:10px}
+.detail-row{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(255,255,255,.6)}
+.detail-row .icon{width:16px;height:16px;flex-shrink:0;margin-top:1px;opacity:.7}
+.detail-row strong{color:rgba(255,255,255,.88)}
+
+.price-card{
+  padding:24px;border-radius:14px;
+  background:linear-gradient(145deg,rgba(155,62,255,.1),rgba(155,62,255,.04));
+  border:1px solid rgba(155,62,255,.22);
+  display:flex;flex-direction:column;justify-content:space-between;
+  min-height:200px;
+}
+.price-card.green-card{
+  background:linear-gradient(145deg,rgba(61,217,106,.08),rgba(61,217,106,.03));
+  border-color:rgba(61,217,106,.2);
+}
+.price-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--pl);margin-bottom:8px}
+.price-card.green-card .price-label{color:var(--gl)}
+.price-val{
+  font-size:26px;font-weight:900;line-height:1.1;margin-bottom:6px;
+  background:linear-gradient(135deg,var(--pl),var(--p));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.price-card.green-card .price-val{
+  background:linear-gradient(135deg,var(--gl),var(--g));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.price-includes{display:flex;flex-direction:column;gap:5px;margin-bottom:18px}
+.price-incl-item{font-size:11px;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:6px}
+.price-incl-item::before{content:'·';color:var(--pl);font-size:16px;line-height:1}
+.price-card.green-card .price-incl-item::before{color:var(--gl)}
+
+/* ── SEPARATOR ── */
+.concept-sep{
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(155,62,255,.15),transparent);
+  margin:64px 0 0;
+}
+
+/* ── FORMAT GRID ── */
+.format-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:44px}
+.format-card{padding:20px;border-radius:13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+.format-card .f-icon{width:26px;height:26px;margin-bottom:10px;color:var(--pl)}
+.format-card .f-icon svg{width:100%;height:100%}
+.format-card .f-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px}
+.format-card .f-desc{font-size:12px;color:rgba(255,255,255,.45);line-height:1.5}
+
+/* ── TECH BLOCK ── */
+.tech-strip{
+  display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px;
+  padding:20px 24px;border-radius:13px;
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.05);
+}
+.tech-item{font-size:12px;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:6px}
+.tech-item::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--p);flex-shrink:0}
+.tech-item.tg::before{background:var(--g)}
+
+/* ── PORTFOLIO STRIP ── */
+.portfolio-strip{margin-bottom:64px}
+.portfolio-strip h3{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:20px}
+.portfolio-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.portfolio-card{border-radius:12px;overflow:hidden;background:#0e0d1a;border:1px solid rgba(255,255,255,.06);aspect-ratio:16/9;position:relative;cursor:pointer}
+.portfolio-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(6,6,14,.8) 0%,transparent 50%);
+}
+.portfolio-card-label{
+  position:absolute;bottom:12px;left:12px;right:12px;z-index:2;
+  font-size:11px;font-weight:700;color:rgba(255,255,255,.7);line-height:1.3;
+}
+.portfolio-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.portfolio-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* ── WHY AIVFX ── */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:64px}
+.why-card{padding:24px;border-radius:14px}
+.why-card .w-icon{width:30px;height:30px;margin-bottom:14px;color:var(--pl)}
+.why-card .w-icon svg{width:100%;height:100%}
+.why-card h3{font-size:14px;font-weight:700;color:#fff;margin-bottom:8px}
+.why-card p{font-size:13px;color:rgba(255,255,255,.5);line-height:1.65}
+
+/* ── CTA ── */
+.cta{text-align:center;padding:90px 0;position:relative;overflow:hidden}
+.cta-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 700px 500px at 50% 50%, rgba(155,62,255,.07) 0%, transparent 65%),
+    radial-gradient(ellipse 400px 300px at 30% 80%, rgba(61,217,106,.04) 0%, transparent 60%);
+}
+.cta h2{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;margin-bottom:14px;position:relative;z-index:1;letter-spacing:-.02em}
+.cta h2 span{
+  background:linear-gradient(135deg,var(--p),var(--pl),var(--g));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.cta p{font-size:16px;color:rgba(255,255,255,.45);margin:0 auto 32px;max-width:480px;position:relative;z-index:1;line-height:1.7}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.cta-contacts{margin-top:32px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap;position:relative;z-index:1}
+.cta-contacts a{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.38);font-size:14px;text-decoration:none;transition:color .25s}
+.cta-contacts a:hover{color:var(--pl)}
+
+/* ── FOOTER ── */
+footer{padding:28px 0;text-align:center;color:rgba(255,255,255,.2);font-size:12px;border-top:1px solid rgba(255,255,255,.04)}
+.footer-inner{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px}
+.footer-logo-mark{
+  width:22px;height:22px;border-radius:6px;
+  background:linear-gradient(135deg,var(--p),var(--pd));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:9px;color:#fff;
+}
+
+/* ── PORTFOLIO ENHANCED ── */
+a.portfolio-card{text-decoration:none}
+.portfolio-thumb{transition:transform .5s ease;position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.portfolio-card:hover .portfolio-thumb{transform:scale(1.06)}
+.portfolio-play-icon{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.13);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.22);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:rgba(255,255,255,.9);
+  opacity:0;transition:opacity .3s;z-index:3;
+}
+.portfolio-card:hover .portfolio-play-icon{opacity:1}
+.portfolio-card-cat{
+  font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;
+  letter-spacing:.08em;margin-bottom:3px;font-weight:600;
+}
+
+/* ── FADE IN ── */
+.fi{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.fi.vis{opacity:1;transform:none}
+
+/* ── STATS ROW ── */
+.stats-row{display:flex;gap:0;margin:40px 0;border:1px solid rgba(255,255,255,.06);border-radius:16px;overflow:hidden}
+.stat{flex:1;padding:24px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.06)}
+.stat:last-child{border-right:none}
+.stat-val{font-size:28px;font-weight:900;letter-spacing:-.02em;
+  background:linear-gradient(135deg,var(--pl),var(--g));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:4px;
+}
+.stat-label{font-size:11px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+
+/* ── SCENARIO INTRO ── */
+.concept-intro{
+  padding:24px 28px;border-radius:14px;margin-bottom:32px;
+  background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);
+}
+.concept-intro p{font-size:14px;color:rgba(255,255,255,.6);line-height:1.8;margin-bottom:12px}
+.concept-intro p:last-child{margin-bottom:0}
+.concept-intro strong{color:rgba(255,255,255,.88)}
+
+/* ── TIMELINE BAR ── */
+.timeline{display:flex;gap:0;margin-bottom:28px;border-radius:10px;overflow:hidden;height:8px}
+.tl-seg{height:100%;transition:flex .3s}
+.tl-seg.s1{background:linear-gradient(90deg,rgba(155,62,255,.6),rgba(155,62,255,.4));flex:2}
+.tl-seg.s2{background:rgba(155,62,255,.35);flex:4}
+.tl-seg.s3{background:rgba(155,62,255,.45);flex:5}
+.tl-seg.s4{background:rgba(155,62,255,.55);flex:4}
+.tl-seg.s5{background:linear-gradient(90deg,rgba(155,62,255,.5),rgba(61,217,106,.5));flex:5}
+
+.tl-seg.gs1{background:linear-gradient(90deg,rgba(61,217,106,.5),rgba(61,217,106,.35));flex:2}
+.tl-seg.gs2{background:rgba(61,217,106,.3);flex:3}
+.tl-seg.gs3{background:rgba(61,217,106,.45);flex:4}
+.tl-seg.gs4{background:rgba(61,217,106,.5);flex:5}
+.tl-seg.gs5{background:linear-gradient(90deg,rgba(61,217,106,.55),rgba(155,62,255,.5));flex:6}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="wrap">
+    <div class="hrow">
+      <a href="#" class="logo">
+        <div class="logo-mark">AI</div>
+        <span class="logo-name">AIVFX</span>
+        <span class="logo-x">×</span>
+        <span class="logo-client">Ситидрайв</span>
+      </a>
+      <span class="kp-chip">Коммерческое предложение · Апрель 2026</span>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero fi">
+  <div class="hero-bg"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="project-label">
+          <span class="dot"></span>
+          OLV-ролики для рекламной кампании
+        </div>
+        <h1>Каршерьте<br>с Ситидрайвом —<br><span class="hi">и выигрывайте призы</span></h1>
+        <p class="hero-sub">Два AI-кинематографических концепта для июньской кампании. Брендированный автомобиль в городской среде, геймификация и призовая механика — всё в 20 секундах.</p>
+        <div class="hero-btns">
+          <a href="#c1" class="btn bp">Смотреть концепты</a>
+          <a href="#cta" class="btn bs">Обсудить проект</a>
+        </div>
+      </div>
+
+      <div class="info-grid glass" style="padding:20px">
+        <div class="info-card">
+          <div class="lbl">Клиент</div>
+          <div class="val"><strong>Ситидрайв</strong><br>citydrive.ru</div>
+        </div>
+        <div class="info-card">
+          <div class="lbl">Формат</div>
+          <div class="val"><strong>OLV · AI-видео</strong><br>съёмочный стиль</div>
+        </div>
+        <div class="info-card">
+          <div class="lbl">Хронометраж</div>
+          <div class="val"><strong>24 сек + 6 сек</strong><br>до 15 ресайзов</div>
+        </div>
+        <div class="info-card">
+          <div class="lbl">Дедлайн</div>
+          <div class="val"><strong>18 мая 2026</strong><br>4 нед. производство</div>
+        </div>
+        <div class="info-card">
+          <div class="lbl">Концепты</div>
+          <div class="val"><strong>2 варианта</strong><br>на выбор</div>
+        </div>
+        <div class="info-card">
+          <div class="lbl">Студия</div>
+          <div class="val"><strong>AIVFX</strong><br>aivfx.ru</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS ROW -->
+    <div class="stats-row" style="margin-top:48px">
+      <div class="stat">
+        <div class="stat-val">24+6</div>
+        <div class="stat-label">секунд</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">15</div>
+        <div class="stat-label">форматов</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">2</div>
+        <div class="stat-label">концепта</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">AI</div>
+        <div class="stat-label">производство</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     КОНЦЕПТ 01 — «Городской Квест»
+══════════════════════════════════════ -->
+<section id="c1" class="fi">
+  <div class="wrap">
+
+    <div class="section-divider">
+      <div class="sd-inner">
+        <div class="sd-num">01</div>
+        <div class="sd-right">
+          <div class="sd-category">Концепт · AI-Кинематик · Ночной город</div>
+          <div class="sd-title">«Городской Квест»</div>
+          <div class="sd-tags">
+            <span class="sd-tag purple">AI-кинематик</span>
+            <span class="sd-tag purple">Геймификация</span>
+            <span class="sd-tag">Ночной город</span>
+            <span class="sd-tag">Призовая механика</span>
+            <span class="sd-tag">Атмосфера</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCEPT INTRO -->
+    <div class="concept-intro fi">
+      <p>Москва ночью — это город, который <strong>живёт и дышит призами</strong>. Камера следует за брендированным автомобилем Ситидрайва сквозь неоновые улицы. Каждый поворот — новое задание. Каждый километр — новые баллы. Мир вокруг буквально <strong>превращается в игровое поле</strong>: здания светятся иконками заданий, баллы улетают в телефон.</p>
+      <p>Стилистика: <strong>AI-кинематик с CGI-оверлеями</strong>, насыщенная цветовая коррекция, dynamic camera moves. Главный герой — молодой горожанин, который обнаруживает, что город стал квестом.</p>
+    </div>
+
+    <!-- STORYBOARD -->
+    <div class="storyboard-label">РАСКАДРОВКА · 20–24 СЕК</div>
+    <div class="timeline fi">
+      <div class="tl-seg s1"></div>
+      <div class="tl-seg s2"></div>
+      <div class="tl-seg s3"></div>
+      <div class="tl-seg s4"></div>
+      <div class="tl-seg s5"></div>
+    </div>
+    <div class="storyboard fi">
+
+      <div class="frame">
+        <div class="frame-media">
+          <img src="%D0%98%D0%BD%D1%84%D0%B0%20%D0%BF%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83/%D0%A4%D0%BE%D1%82%D0%BE%20%D0%B4%D0%BB%D1%8F%20%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%B3%D0%BE%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%82%D0%B0/1.jpg" alt="Концепт 1 — кадр 1" loading="lazy">
+        </div>
+        <div class="frame-info">
+          <div class="frame-time">0–3 с</div>
+          <div class="frame-type">Открытие</div>
+          <div class="frame-desc">Аэрол над ночной Москвой. Брендированный Ситидрайв движется по шоссе, неон отражается в мокром асфальте.</div>
+          <div class="frame-note">Drone shot → track-in. Lens flare от фар.</div>
+        </div>
+      </div>
+
+      <div class="frame">
+        <div class="frame-media">
+          <img src="%D0%98%D0%BD%D1%84%D0%B0%20%D0%BF%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83/%D0%A4%D0%BE%D1%82%D0%BE%20%D0%B4%D0%BB%D1%8F%20%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%B3%D0%BE%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%82%D0%B0/2.jpg" alt="Концепт 1 — кадр 2" loading="lazy">
+        </div>
+        <div class="frame-info">
+          <div class="frame-time">3–7 с</div>
+          <div class="frame-type">Завязка</div>
+          <div class="frame-desc">Герой на улице. Push-уведомление Ситидрайва — «Начни квест». Открывает приложение, видит карту города с заданиями.</div>
+          <div class="frame-note">Close-up телефона → расширение на город. Parallax-переход.</div>
+        </div>
+      </div>
+
+      <div class="frame">
+        <div class="frame-media">
+          <img src="%D0%98%D0%BD%D1%84%D0%B0%20%D0%BF%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83/%D0%A4%D0%BE%D1%82%D0%BE%20%D0%B4%D0%BB%D1%8F%20%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%B3%D0%BE%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%82%D0%B0/3.jpg" alt="Концепт 1 — кадр 3" loading="lazy">
+        </div>
+        <div class="frame-info">
+          <div class="frame-time">7–13 с</div>
+          <div class="frame-type">Развитие</div>
+          <div class="frame-desc">Интерьер авто. Герой едет, приборная панель интегрирована с игрой — баллы начисляются в реальном времени. Улыбка.</div>
+          <div class="frame-note">Driver POV + dashboard UI overlay. Быстрый монтаж вид снаружи/изнутри.</div>
+        </div>
+      </div>
+
+      <div class="frame">
+        <div class="frame-media">
+          <img src="%D0%98%D0%BD%D1%84%D0%B0%20%D0%BF%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83/%D0%A4%D0%BE%D1%82%D0%BE%20%D0%B4%D0%BB%D1%8F%20%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%B3%D0%BE%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%82%D0%B0/4.jpg" alt="Концепт 1 — кадр 4" loading="lazy">
+        </div>
+        <div class="frame-info">
+          <div class="frame-time">13–18 с</div>
+          <div class="frame-type">Кульминация</div>
+          <div class="frame-desc">Город оживает — CGI-баллы вылетают из зданий и витрин в телефон. Авто Ситидрайва в центре этого вихря.</div>
+          <div class="frame-note">Stylized AI composite. Slow-motion + particle FX. Фиолетово-зелёная палитра.</div>
+        </div>
+      </div>
+
+      <div class="frame">
+        <div class="frame-media">
+          <img src="%D0%98%D0%BD%D1%84%D0%B0%20%D0%BF%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83/%D0%A4%D0%BE%D1%82%D0%BE%20%D0%B4%D0%BB%D1%8F%20%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%B3%D0%BE%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%82%D0%B0/5.png" alt="Концепт 1 — кадр 5" loading="lazy">
+        </div>
+        <div class="frame-info">
+          <div class="frame-time">18–20 с</div>
+          <div class="frame-type">Финал</div>
+          <div class="frame-desc">Герой получает приз — анимация победы в приложении. Логотип Ситидрайва. Слоган: «Каршерьте — выигрывайте».</div>
+          <div class="frame-note">UI animation + logo lockup. Subtext + CTA «Скачать приложение».</div>
+        </div>
+      </div>
+
+    </div><!-- /storyboard -->
+
+    <!-- DETAILS -->
+    <div class="concept-details fi">
+
+      <div class="detail-block glass">
+        <h4>Производство</h4>
+        <div class="detail-rows">
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(155,62,255,.7)" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><polyline points="8 4.5 8 8 10.5 9.5"/></svg>
+            <div>Хронометраж: <strong>20–24 сек (мастер) + 6 сек (катофф)</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(155,62,255,.7)" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="2"/><polyline points="6 3 6 13"/><polyline points="10 3 10 13"/></svg>
+            <div>Формат: <strong>AI-кинематик, съёмочный стиль</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(155,62,255,.7)" stroke-width="1.5"><path d="M8 2C4.7 2 2 4.7 2 8s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z"/><path d="M5 9l2 2 4-5"/></svg>
+            <div>Брендинг авто: <strong>оклейка Ситидрайва сохраняется во всех сценах</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(155,62,255,.7)" stroke-width="1.5"><path d="M4 4h8v8H4z"/><path d="M4 4L2 2M12 4l2-2M4 12l-2 2M12 12l2 2"/></svg>
+            <div>Субтитры: <strong>да, во всех форматах</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(155,62,255,.7)" stroke-width="1.5"><path d="M3 8h10M3 5h10M3 11h6"/></svg>
+            <div>Саунд-дизайн и озвучка: <strong>на стороне агентства</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-block glass">
+        <h4>Технология и стиль</h4>
+        <div class="detail-rows">
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(155,62,255,.7)" stroke-width="1.5"><path d="M2 8c2-4 10-4 12 0s-10 4-12 0z"/><circle cx="8" cy="8" r="2"/></svg>
+            <div>AI-генерация: <strong>Kling, Seedance, Runway — люди и городская среда</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(155,62,255,.7)" stroke-width="1.5"><polygon points="8 2 14 6 14 10 8 14 2 10 2 6"/></svg>
+            <div>Компоузинг: <strong>CGI-оверлеи, particle FX, UI-анимация приложения</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(155,62,255,.7)" stroke-width="1.5"><path d="M2 13l5-5-3-3 9-3-3 9-3-3-5 5z"/></svg>
+            <div>Цветовая палитра: <strong>фиолетово-зелёный неон, ночная Москва</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(155,62,255,.7)" stroke-width="1.5"><rect x="2" y="5" width="12" height="7" rx="1"/><path d="M5 5V3.5A1.5 1.5 0 016.5 2h3A1.5 1.5 0 0111 3.5V5"/></svg>
+            <div>Источник авто: <strong>3D-исходник от Ситидрайва</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(155,62,255,.7)" stroke-width="1.5"><path d="M4 12V4l4 4 4-4v8"/></svg>
+            <div>Монтаж: <strong>DaVinci Resolve, динамичный ритм</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-card">
+        <div>
+          <div class="price-label">Стоимость · Концепт 01</div>
+          <div class="price-val">По запросу</div>
+          <div class="price-includes">
+            <div class="price-incl-item">Мастер-ролик 24 сек</div>
+            <div class="price-incl-item">Короткий кат 6 сек</div>
+            <div class="price-incl-item">До 15 форматов ресайза</div>
+            <div class="price-incl-item">Правки 2 раунда</div>
+            <div class="price-incl-item">Субтитры во всех форматах</div>
+          </div>
+        </div>
+        <a href="#cta" class="btn bp" style="width:100%;justify-content:center">Обсудить →</a>
+      </div>
+
+    </div>
+
+    <!-- FORMAT GRID -->
+    <div class="format-grid fi">
+      <div class="format-card">
+        <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="17" y1="7" x2="22" y2="7"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="2" y1="17" x2="7" y2="17"/></svg></div>
+        <div class="f-title">Мастер 16:9 · 24 сек</div>
+        <div class="f-desc">Полная версия для YouTube, Smart TV, Desktop OLV</div>
+      </div>
+      <div class="format-card">
+        <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+        <div class="f-title">Вертикаль 9:16 · 24 сек</div>
+        <div class="f-desc">Stories, Reels, TikTok, мобильный OLV</div>
+      </div>
+      <div class="format-card">
+        <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div class="f-title">6-секундный каттофф</div>
+        <div class="f-desc">Pre-roll, bumper-реклама, все форматы по ТТ</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SEPARATOR -->
+<div class="wrap"><div class="concept-sep"></div></div>
+
+<!-- ══════════════════════════════════════
+     КОНЦЕПТ 02 — «Нажми — Победи»
+══════════════════════════════════════ -->
+<section id="c2" class="fi">
+  <div class="wrap">
+
+    <div class="section-divider">
+      <div class="sd-inner">
+        <div class="sd-num green">02</div>
+        <div class="sd-right">
+          <div class="sd-category">Концепт · Dynamic Split-Screen · Дневной город</div>
+          <div class="sd-title">«Нажми — Победи»</div>
+          <div class="sd-tags">
+            <span class="sd-tag green">AI-видео</span>
+            <span class="sd-tag green">Split-screen</span>
+            <span class="sd-tag">Дневной город</span>
+            <span class="sd-tag">Высокий темп</span>
+            <span class="sd-tag">App UX</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCEPT INTRO -->
+    <div class="concept-intro fi">
+      <p>Энергичный, дерзкий концепт для аудитории, которой не нужны долгие объяснения. <strong>Быстрые срезки</strong>, разделённый экран (реальный мир vs. игровой интерфейс), дневной Москва в самом ярком настроении. Каждые 3 секунды — новый импульс.</p>
+      <p>Концепт строится на <strong>split-screen механике</strong>: левая половина — реальная езда на брендированном Ситидрайве, правая — интерфейс приложения с нарастающим счётом, заданиями и призами. В финале экраны сливаются — и победа взрывается конфетти.</p>
+    </div>
+
+    <!-- STORYBOARD -->
+    <div class="storyboard-label">РАСКАДРОВКА · 20–24 СЕК</div>
+    <div class="timeline fi">
+      <div class="tl-seg gs1"></div>
+      <div class="tl-seg gs2"></div>
+      <div class="tl-seg gs3"></div>
+      <div class="tl-seg gs4"></div>
+      <div class="tl-seg gs5"></div>
+    </div>
+    <div class="storyboard fi">
+
+      <div class="frame green-frame">
+        <div class="frame-media">
+          <img src="%D0%98%D0%BD%D1%84%D0%B0%20%D0%BF%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83/%D0%A4%D0%BE%D1%82%D0%BE%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%82%D0%BE%D1%80%D0%BE%D0%B3%D0%BE%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%82%D0%B0/1.jpg" alt="Концепт 2 — кадр 1" loading="lazy">
+        </div>
+        <div class="frame-info">
+          <div class="frame-time">0–2 с</div>
+          <div class="frame-type">Открытие</div>
+          <div class="frame-desc">Экран телефона — палец нажимает «Старт» в приложении. Резкий переход к экстерьеру авто Ситидрайва на солнечной улице.</div>
+          <div class="frame-note">Macro tap → whip-pan к машине. Sound design: клик + двигатель.</div>
+        </div>
+      </div>
+
+      <div class="frame green-frame">
+        <div class="frame-media">
+          <img src="%D0%98%D0%BD%D1%84%D0%B0%20%D0%BF%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83/%D0%A4%D0%BE%D1%82%D0%BE%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%82%D0%BE%D1%80%D0%BE%D0%B3%D0%BE%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%82%D0%B0/2.jpg" alt="Концепт 2 — кадр 2" loading="lazy">
+        </div>
+        <div class="frame-info">
+          <div class="frame-time">2–6 с</div>
+          <div class="frame-type">Завязка</div>
+          <div class="frame-desc">Герой садится в Ситидрайв — улыбается, телефон на приборной. Дневной свет, яркая Москва. Авто начинает движение.</div>
+          <div class="frame-note">Cinematic door close + settling in. Оклейка авто крупно в кадре.</div>
+        </div>
+      </div>
+
+      <div class="frame green-frame">
+        <div class="frame-media">
+          <img src="%D0%98%D0%BD%D1%84%D0%B0%20%D0%BF%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83/%D0%A4%D0%BE%D1%82%D0%BE%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%82%D0%BE%D1%80%D0%BE%D0%B3%D0%BE%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%82%D0%B0/3.jpg" alt="Концепт 2 — кадр 3" loading="lazy">
+        </div>
+        <div class="frame-info">
+          <div class="frame-time">6–13 с</div>
+          <div class="frame-type">Кульминация</div>
+          <div class="frame-desc">Split-screen: слева — съёмка езды по Москве, справа — интерфейс игры с задачами и нарастающими баллами. Быстрый монтаж.</div>
+          <div class="frame-note">Dynamic split-screen. Score counter анимация. Subtitles overlay.</div>
+        </div>
+      </div>
+
+      <div class="frame green-frame">
+        <div class="frame-media">
+          <img src="%D0%98%D0%BD%D1%84%D0%B0%20%D0%BF%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83/%D0%A4%D0%BE%D1%82%D0%BE%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%82%D0%BE%D1%80%D0%BE%D0%B3%D0%BE%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%82%D0%B0/4.jpg" alt="Концепт 2 — кадр 4" loading="lazy">
+        </div>
+        <div class="frame-info">
+          <div class="frame-time">13–18 с</div>
+          <div class="frame-type">Развязка</div>
+          <div class="frame-desc">Счётчик баллов достигает максимума. Анимация «Приз разблокирован!». Герой — довольная реакция. Экраны начинают сливаться.</div>
+          <div class="frame-note">UI celebration animation. Screen merge transition. Конфетти CGI.</div>
+        </div>
+      </div>
+
+      <div class="frame green-frame">
+        <div class="frame-media">
+          <img src="%D0%98%D0%BD%D1%84%D0%B0%20%D0%BF%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83/%D0%A4%D0%BE%D1%82%D0%BE%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%82%D0%BE%D1%80%D0%BE%D0%B3%D0%BE%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%82%D0%B0/5.jpg" alt="Концепт 2 — кадр 5" loading="lazy">
+        </div>
+        <div class="frame-info">
+          <div class="frame-time">18–20 с</div>
+          <div class="frame-type">Финал</div>
+          <div class="frame-desc">Полный экран — логотип Ситидрайва на фоне зелёного. Слоган «Каршерьте — выигрывайте». CTA: «Скачай приложение».</div>
+          <div class="frame-note">Logo animation + brand lockup. App store badges. End card.</div>
+        </div>
+      </div>
+
+    </div><!-- /storyboard -->
+
+    <!-- DETAILS -->
+    <div class="concept-details fi">
+
+      <div class="detail-block glass-green">
+        <h4 style="color:var(--gl)">Производство</h4>
+        <div class="detail-rows">
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(61,217,106,.7)" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><polyline points="8 4.5 8 8 10.5 9.5"/></svg>
+            <div>Хронометраж: <strong>20–24 сек + 6 сек каттофф</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(61,217,106,.7)" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="2"/><polyline points="6 3 6 13"/><polyline points="10 3 10 13"/></svg>
+            <div>Формат: <strong>динамичный split-screen, дневная съёмка</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(61,217,106,.7)" stroke-width="1.5"><path d="M8 2C4.7 2 2 4.7 2 8s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z"/><path d="M5 9l2 2 4-5"/></svg>
+            <div>Брендинг авто: <strong>оклейка Ситидрайва — крупно во всех сценах</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(61,217,106,.7)" stroke-width="1.5"><path d="M4 4h8v8H4z"/><path d="M4 4L2 2M12 4l2-2M4 12l-2 2M12 12l2 2"/></svg>
+            <div>UI-анимация: <strong>кастомный интерфейс приложения в кадре</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(61,217,106,.7)" stroke-width="1.5"><path d="M3 8h10M3 5h10M3 11h6"/></svg>
+            <div>Субтитры и озвучка: <strong>да, по всем форматам</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-block glass-green">
+        <h4 style="color:var(--gl)">Технология и стиль</h4>
+        <div class="detail-rows">
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(61,217,106,.7)" stroke-width="1.5"><path d="M2 8c2-4 10-4 12 0s-10 4-12 0z"/><circle cx="8" cy="8" r="2"/></svg>
+            <div>AI-генерация: <strong>Kling, Seedance — дневные городские сцены</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(61,217,106,.7)" stroke-width="1.5"><polygon points="8 2 14 6 14 10 8 14 2 10 2 6"/></svg>
+            <div>Компоузинг: <strong>split-screen механика, UI app mockup, конфетти FX</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(61,217,106,.7)" stroke-width="1.5"><path d="M2 13l5-5-3-3 9-3-3 9-3-3-5 5z"/></svg>
+            <div>Цветовая палитра: <strong>яркий дневной свет, зелёно-белая гамма бренда</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(61,217,106,.7)" stroke-width="1.5"><rect x="2" y="5" width="12" height="7" rx="1"/><path d="M5 5V3.5A1.5 1.5 0 016.5 2h3A1.5 1.5 0 0111 3.5V5"/></svg>
+            <div>Источник авто: <strong>3D-исходник от Ситидрайва + AI среда</strong></div>
+          </div>
+          <div class="detail-row">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="rgba(61,217,106,.7)" stroke-width="1.5"><path d="M4 12V4l4 4 4-4v8"/></svg>
+            <div>Ритм: <strong>высокий темп, срезки каждые 2–3 сек</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-card green-card">
+        <div>
+          <div class="price-label">Стоимость · Концепт 02</div>
+          <div class="price-val">По запросу</div>
+          <div class="price-includes">
+            <div class="price-incl-item">Мастер-ролик 24 сек</div>
+            <div class="price-incl-item">Короткий кат 6 сек</div>
+            <div class="price-incl-item">До 15 форматов ресайза</div>
+            <div class="price-incl-item">Правки 2 раунда</div>
+            <div class="price-incl-item">Субтитры во всех форматах</div>
+          </div>
+        </div>
+        <a href="#cta" class="btn bg-btn" style="width:100%;justify-content:center">Обсудить →</a>
+      </div>
+
+    </div>
+
+    <!-- FORMAT GRID -->
+    <div class="format-grid fi">
+      <div class="format-card">
+        <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="17" y1="7" x2="22" y2="7"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="2" y1="17" x2="7" y2="17"/></svg></div>
+        <div class="f-title">Мастер 16:9 · 24 сек</div>
+        <div class="f-desc">Полная версия для YouTube, Smart TV, Desktop OLV</div>
+      </div>
+      <div class="format-card">
+        <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+        <div class="f-title">Вертикаль 9:16 · 24 сек</div>
+        <div class="f-desc">Stories, Reels, TikTok, мобильный OLV</div>
+      </div>
+      <div class="format-card">
+        <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div class="f-title">6-секундный каттофф</div>
+        <div class="f-desc">Pre-roll, bumper-реклама, все форматы по ТТ</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SEPARATOR -->
+<div class="wrap"><div class="concept-sep" style="background:linear-gradient(90deg,transparent,rgba(61,217,106,.15),transparent)"></div></div>
+
+<!-- ══════════════════════════════════════
+     ПОЧЕМУ AIVFX + ПОРТФОЛИО
+══════════════════════════════════════ -->
+<section class="fi" style="padding:64px 0">
+  <div class="wrap">
+
+    <div class="storyboard-label" style="margin-bottom:32px">ПОЧЕМУ AIVFX</div>
+
+    <div class="why-grid fi">
+      <div class="why-card glass">
+        <div class="w-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="17" y1="7" x2="22" y2="7"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="2" y1="17" x2="7" y2="17"/></svg></div>
+        <h3>AI-кинематик нового уровня</h3>
+        <p>Работаем с Kling, Seedance, Runway, Nano Banana — выбираем инструмент под задачу. Результат выглядит как съёмка, но создаётся без площадки.</p>
+      </div>
+      <div class="why-card glass">
+        <div class="w-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <h3>Скорость без потери качества</h3>
+        <p>4 недели — реальный срок для полного цикла: концепт → производство → ресайзы. Параллельная обработка форматов ускоряет финальный этап.</p>
+      </div>
+      <div class="why-card glass">
+        <div class="w-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 21 12 21 16 21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M7 4v8a5 5 0 0 0 10 0V4H7z"/><path d="M7 9H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3"/><path d="M17 9h3a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-3"/></svg></div>
+        <h3>Опыт с крупными брендами</h3>
+        <p>В портфолио: Dyson, Porsche, Rolex, NL, Danube Properties, Dehancer. Понимаем требования к брендингу и сохранению фирменного стиля в кадре.</p>
+      </div>
+    </div>
+
+    <!-- PORTFOLIO -->
+    <div class="portfolio-strip fi">
+      <h3>Избранные работы · <span style="color:rgba(155,62,255,.5);font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">нажмите для просмотра</span></h3>
+      <div class="portfolio-cards" style="grid-template-columns:repeat(4,1fr)">
+
+        <a href="https://kinescope.io/m3NLddqMox1n1yZVDYK7tT" target="_blank" rel="noopener" class="portfolio-card">
+          <img class="portfolio-thumb" src="https://kinescopecdn.net/93fe4340-bcc0-4481-a0ab-6cf3abd365bb/posters/4c6394c2-f35f-4287-981a-af977b2ef882/md/70eb5677-1b16-4697-a43c-69be8e1eaca5.jpg" alt="Chevrolet × NL" loading="lazy">
+          <div class="portfolio-play-icon">▶</div>
+          <div class="portfolio-card-label">
+            <div class="portfolio-card-cat">Автомобили · AI · 1:17</div>
+            Chevrolet × NL — к горизонту
+          </div>
+        </a>
+
+        <a href="https://kinescope.io/djYgZtKb2MZPDSJ8Z3zuHu" target="_blank" rel="noopener" class="portfolio-card">
+          <img class="portfolio-thumb" src="https://kinescopecdn.net/93fe4340-bcc0-4481-a0ab-6cf3abd365bb/posters/bc1a5d41-8d07-4b24-9feb-6c84adc66c58/md/c9e11d0e-6f59-4397-952f-b2a97adf2ea8.jpg" alt="Porsche 911" loading="lazy">
+          <div class="portfolio-play-icon">▶</div>
+          <div class="portfolio-card-label">
+            <div class="portfolio-card-cat">Автомобили · AI · 0:57</div>
+            Porsche 911 — лесная охота
+          </div>
+        </a>
+
+        <a href="https://kinescope.io/bbVvXDBp2dUjXfTRGYRCC1" target="_blank" rel="noopener" class="portfolio-card">
+          <img class="portfolio-thumb" src="https://kinescopecdn.net/93fe4340-bcc0-4481-a0ab-6cf3abd365bb/posters/ece39777-d806-4bbf-a38a-81d08a7cb093/md/b84f2fe9-f90e-475f-a674-aaf6aab2a979.jpg" alt="Rolex Submariner" loading="lazy">
+          <div class="portfolio-play-icon">▶</div>
+          <div class="portfolio-card-label">
+            <div class="portfolio-card-cat">Продукты · VFX · 0:35</div>
+            Rolex Submariner
+          </div>
+        </a>
+
+        <a href="https://kinescope.io/qt5oidr2pdY24mcTurXLjG" target="_blank" rel="noopener" class="portfolio-card">
+          <img class="portfolio-thumb" src="https://kinescopecdn.net/93fe4340-bcc0-4481-a0ab-6cf3abd365bb/posters/7682af3d-200e-4755-ad18-c03e1e7d78ed/md/cd27cb16-f70f-4bb7-8601-5c2e27a5be3e.jpg" alt="Dyson Supersonic" loading="lazy">
+          <div class="portfolio-play-icon">▶</div>
+          <div class="portfolio-card-label">
+            <div class="portfolio-card-cat">Продукты · VFX · 0:16</div>
+            Dyson Supersonic
+          </div>
+        </a>
+
+        <a href="https://kinescope.io/iMCp8ad9XfQv581EALj98u" target="_blank" rel="noopener" class="portfolio-card">
+          <img class="portfolio-thumb" src="https://kinescopecdn.net/93fe4340-bcc0-4481-a0ab-6cf3abd365bb/posters/bcd8bc1a-9a45-4fd2-986a-33c7ba7b24ff/md/d0e11129-8926-451a-8f20-e05c08231381.jpg" alt="Sony PlayStation 5 Pro" loading="lazy">
+          <div class="portfolio-play-icon">▶</div>
+          <div class="portfolio-card-label">
+            <div class="portfolio-card-cat">Продукты · VFX · 0:19</div>
+            Sony PlayStation 5 Pro
+          </div>
+        </a>
+
+        <a href="https://kinescope.io/rWskav5fuyd2QguMyYdy4k" target="_blank" rel="noopener" class="portfolio-card">
+          <img class="portfolio-thumb" src="https://kinescopecdn.net/93fe4340-bcc0-4481-a0ab-6cf3abd365bb/posters/4f737f96-1d45-4b23-8b63-d43c5b55da86/md/9e22bdea-1b47-44b8-b7e0-2535b3ce8f1b.jpg" alt="Metaboost" loading="lazy">
+          <div class="portfolio-play-icon">▶</div>
+          <div class="portfolio-card-label">
+            <div class="portfolio-card-cat">Продукты · VFX · 0:38</div>
+            Metaboost
+          </div>
+        </a>
+
+        <a href="https://kinescope.io/rYRXSqGrXaW9fKhSuXtCy1" target="_blank" rel="noopener" class="portfolio-card">
+          <img class="portfolio-thumb" src="https://kinescopecdn.net/93fe4340-bcc0-4481-a0ab-6cf3abd365bb/posters/686c1d14-a722-4610-8098-f1c9a8bc6dca/md/019da383-55ad-7c47-8ea7-68ede019b730.jpg" alt="SACRED fashion reel" loading="lazy">
+          <div class="portfolio-play-icon">▶</div>
+          <div class="portfolio-card-label">
+            <div class="portfolio-card-cat">Социальное · AI · 0:17</div>
+            SACRED — fashion reel
+          </div>
+        </a>
+
+        <a href="https://kinescope.io/oR9rsbz3KVozDRR5kqqb91" target="_blank" rel="noopener" class="portfolio-card">
+          <img class="portfolio-thumb" src="https://kinescopecdn.net/93fe4340-bcc0-4481-a0ab-6cf3abd365bb/posters/ef547af1-3d3b-4024-8ab6-549a8946cd73/md/ba03572a-7d22-4231-8839-3b28957d3975.jpg" alt="NL Sets" loading="lazy">
+          <div class="portfolio-play-icon">▶</div>
+          <div class="portfolio-card-label">
+            <div class="portfolio-card-cat">Продукты · AI · 1:43</div>
+            NL Sets
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- TECH STRIP -->
+    <div class="tech-strip fi">
+      <div class="tech-item">Kling AI</div>
+      <div class="tech-item">Seedance</div>
+      <div class="tech-item">Runway Gen-3</div>
+      <div class="tech-item">Nano Banana (Google)</div>
+      <div class="tech-item tg">DaVinci Resolve</div>
+      <div class="tech-item tg">Adobe After Effects</div>
+      <div class="tech-item tg">Luma Labs</div>
+      <div class="tech-item">CGI Compositing</div>
+      <div class="tech-item tg">SB Sans · Шрифты</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CTA
+══════════════════════════════════════ -->
+<section id="cta" class="cta fi">
+  <div class="cta-bg"></div>
+  <div class="wrap">
+    <h2>Готовы запустить<br><span>городской квест?</span></h2>
+    <p>Выберите концепт или предложите доработку — обсудим детали, согласуем сроки и стартуем производство.</p>
+    <div class="cta-btns">
+      <a href="https://t.me/aivfx" class="btn bp">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Написать в Telegram
+      </a>
+      <a href="mailto:info@aivfx.ru" class="btn bs">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        info@aivfx.ru
+      </a>
+    </div>
+    <div class="cta-contacts">
+      <a href="https://aivfx.ru" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        aivfx.ru
+      </a>
+      <a href="https://t.me/aivfx" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        @aivfx
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-logo-mark">AI</div>
+      <span style="color:rgba(255,255,255,.35);font-weight:600">AIVFX</span>
+      <span style="color:rgba(255,255,255,.1)">×</span>
+      <span style="color:rgba(61,217,106,.4);font-weight:600">Ситидрайв</span>
+    </div>
+    <div>Коммерческое предложение · OLV-ролики · Апрель 2026</div>
+    <div style="margin-top:4px;color:rgba(255,255,255,.12)">Документ предназначен исключительно для клиента. Не для распространения.</div>
+  </div>
+</footer>
+
+<script>
+// Fade-in observer
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('vis');
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+
+</script>
+
+</body>
+</html>
